@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torre de Hanói</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Torre de Hanói</h1>
+      <p class="subtitle">Clique numa haste pra pegar o disco do topo, clique noutra pra soltar.</p>
+    </header>
+
+    <section class="controls">
+      <div class="control-group">
+        <label for="discCount">Discos</label>
+        <select id="discCount">
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+
+      <button id="btnNovo" class="btn btn-primary">Novo jogo</button>
+      <button id="btnDesfazer" class="btn">↶ Desfazer</button>
+      <button id="btnRefazer" class="btn">↷ Refazer</button>
+      <button id="btnAuto" class="btn btn-accent">▶ Resolver automaticamente</button>
+
+      <div class="control-group">
+        <label for="velocidade">Velocidade</label>
+        <select id="velocidade">
+          <option value="700">Lenta</option>
+          <option value="350" selected>Normal</option>
+          <option value="120">Rápida</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="status">
+      <span>Movimentos: <strong id="contadorMovimentos">0</strong></span>
+      <span>Mínimo possível: <strong id="minimoMovimentos">0</strong></span>
+      <span id="mensagem" class="mensagem"></span>
+    </section>
+
+    <section class="board" id="board">
+      <div class="peg-column" data-peg="A">
+        <div class="peg-label">A</div>
+        <div class="discs" id="discs-A"></div>
+        <div class="rod"></div>
+        <div class="base"></div>
+      </div>
+      <div class="peg-column" data-peg="B">
+        <div class="peg-label">B</div>
+        <div class="discs" id="discs-B"></div>
+        <div class="rod"></div>
+        <div class="base"></div>
+      </div>
+      <div class="peg-column" data-peg="C">
+        <div class="peg-label">C</div>
+        <div class="discs" id="discs-C"></div>
+        <div class="rod"></div>
+        <div class="base"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Regras: mova um disco por vez, sempre o do topo, e nunca coloque um disco maior sobre um menor.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

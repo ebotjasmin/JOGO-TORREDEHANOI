@@ -1,48 +1,61 @@
-Torre de Hanói em C
-Implementação da Torre de Hanói em C, usando apenas estruturas de dados
+Torre de Hanói - Interface Web
+Versão jogável no navegador, feita com HTML + CSS + JavaScript puro
 
-dinâmicas encadeadas (nada de vetores/arrays fixos):
-·	Pilhas (lista encadeada simples) para representar as três hastes.
-·	Lista encadeada para registrar a sequência de movimentos da solução recursiva.
-·	Fila (lista encadeada) para reproduzir/simular uma sequência de movimentos já conhecida.
-·	Lista duplamente encadeada para desfazer/refazer jogadas.
+(sem frameworks) e um servidor Node.js minimalista (sem dependências
+
+externas) só pra servir os arquivos.
+Como rodar
+cd web
+node server.js
+
+Depois abra http://localhost:3000 no navegador.
+Ou, se preferir usar o npm:
+cd web
+npm start
+
 Como jogar
-make run
+·	Clique numa haste para selecionar (pega o disco do topo).
+·	Clique em outra haste para soltar o disco lá.
+·	Clique na mesma haste de novo para cancelar a seleção.
+·	Desfazer / Refazer: voltam e avançam movimentos, iguais aos da
 
-Isso compila o projeto e abre um menu:
-===== TORRE DE HANOI =====
-1. Jogar manualmente
-2. Ver solucao automatica
-3. Sair
+versão em C (lista duplamente encadeada / cursor de histórico).
+·	Resolver automaticamente: calcula a solução ótima recursivamente
 
-·	Jogar manualmente: escolha a haste de origem e destino a cada jogada.
+e anima a resolução, movimento a movimento (dá pra ajustar a velocidade).
+Estrutura
+web/
+├── server.js         # servidor estatico (http + fs, sem dependencias)
+├── package.json
+└── public/
+    ├── index.html
+    ├── style.css     # identidade visual (brinquedo de madeira / discos)
+    └── script.js     # logica do jogo (pilhas, historico, solucao recursiva)
 
-Comandos extras: d desfaz o último movimento, r refaz.
-·	Ver solução automática: calcula a solução ótima recursivamente e
+Sobre a lógica em JavaScript
+O script.js espelha a mesma lógica de estruturas de dados da versão em C:
+·	Cada haste é uma pilha (array onde o último elemento é o topo,
 
-reproduz o jogo passo a passo (com opção de pausar a cada passo).
-Estrutura do projeto
-hanoi-game/
-├── include/
-│   ├── pilha.h        # hastes (pilhas dinâmicas de discos)
-│   ├── movimento.h     # lista de movimentos + solução recursiva
-│   ├── fila.h           # fila para reproduzir movimentos
-│   └── historico.h     # lista dupla para desfazer/refazer
-├── src/
-│   ├── pilha.c
-│   ├── movimento.c
-│   ├── fila.c
-│   ├── historico.c
-│   └── main.c           # menu / jogo interativo
-├── Makefile
-└── README.md
+usando push/pop, exatamente como a pilha encadeada em C).
+·	O histórico de jogadas usa um cursor apontando pro último
 
-Compilar manualmente
-gcc -Wall -Wextra -std=c11 -Iinclude src/*.c -o hanoi
-./hanoi
+movimento aplicado — o mesmo mecanismo da lista duplamente encadeada
 
-Regras do jogo
-1.	Mover apenas um disco por vez.
-2.	Sempre mover o disco do topo de uma haste.
-3.	Nunca colocar um disco maior sobre um menor.
-O número mínimo de movimentos para resolver com n discos é 2^n - 1.
+da Questão 4 do trabalho original — o que permite desfazer/refazer
+
+com consistência garantida.
+·	A solução automática usa a mesma recursão clássica (hanoiRecursivo)
+
+da Questão 2.
+Deploy (opcional)
+Como é só HTML/CSS/JS estático + um servidor Node bem simples, dá pra
+
+publicar de graça em serviços como Vercel, Netlify ou
+
+GitHub Pages (nesse último caso, só a pasta public/, já que o
+
+GitHub Pages não roda o server.js — mas o jogo funciona 100% no
+
+navegador sem precisar de backend, o server.js é só conveniência
+
+pra rodar local).

@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -Iinclude
-SRC = $(wildcard src/*.c)
+CFLAGS = -Wall -Wextra -std=c11
+SRC = $(wildcard *.c)
 BIN = hanoi
 
 .PHONY: all run clean
