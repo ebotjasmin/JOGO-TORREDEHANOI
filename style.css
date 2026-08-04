@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+:root {
+  --wood-dark: #241610;
+  --wood-medium: #3d2818;
+  --wood-board: #5a3823;
+  --wood-board-light: #6e462c;
+  --brass: #cda15a;
+  --brass-dim: #8a713f;
+  --cream: #f3e9d8;
+  --cream-dim: #cbb99f;
+  --danger: #d1614a;
+
+  --disc-1: #e0654f;
+  --disc-2: #ec9b4f;
+  --disc-3: #e9c15f;
+  --disc-4: #8fb96a;
+  --disc-5: #4f9e93;
+  --disc-6: #4a7fa5;
+  --disc-7: #7a6ba8;
+  --disc-8: #b0567e;
+
+  --radius: 10px;
+  --font-display: 'Fraunces', serif;
+  --font-ui: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% -10%, rgba(205, 161, 90, 0.08), transparent 45%),
+    var(--wood-dark);
+  color: var(--cream);
+  font-family: var(--font-ui);
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+
+.app {
+  width: 100%;
+  max-width: 780px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5vw, 2.9rem);
+  letter-spacing: 0.01em;
+  margin: 0 0 6px;
+  color: var(--cream);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--wood-medium);
+  border: 1px solid rgba(205, 161, 90, 0.25);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+}
+
+select {
+  background: transparent;
+  color: var(--cream);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+select:focus-visible,
+.btn:focus-visible,
+.peg-column:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cream);
+  background: var(--wood-medium);
+  border: 1px solid rgba(205, 161, 90, 0.25);
+  border-radius: var(--radius);
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.btn:hover { transform: translateY(-1px); border-color: var(--brass); }
+.btn:active { transform: translateY(0); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-primary {
+  background: var(--brass);
+  color: var(--wood-dark);
+  border-color: var(--brass);
+}
+.btn-primary:hover { background: #dab26a; }
+
+.btn-accent {
+  background: transparent;
+  border-color: var(--brass-dim);
+  color: var(--brass);
+}
+.btn-accent:hover { border-color: var(--brass); }
+
+/* ---------- Status ---------- */
+
+.status {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--cream-dim);
+  margin-bottom: 22px;
+  min-height: 20px;
+}
+
+.status strong { color: var(--brass); font-weight: 500; }
+
+.mensagem {
+  color: var(--cream);
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.mensagem.erro { color: var(--danger); }
+.mensagem.sucesso { color: #9fd88a; }
+
+/* ---------- Board ---------- */
+
+.board {
+  background:
+    repeating-linear-gradient(
+      100deg,
+      var(--wood-board) 0px,
+      var(--wood-board) 3px,
+      var(--wood-board-light) 3px,
+      var(--wood-board-light) 4px
+    );
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.35);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35), inset 0 0 60px rgba(0,0,0,0.25);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 40px 20px 0;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.peg-column {
+  position: relative;
+  width: 32%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.peg-column.selecionada .rod { box-shadow: 0 0 0 3px var(--brass); }
+
+.peg-label {
+  position: absolute;
+  top: -28px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.08em;
+}
+
+.rod {
+  position: absolute;
+  bottom: 14px;
+  width: 14px;
+  height: 240px;
+  background: linear-gradient(90deg, #7a5232, var(--brass) 45%, #7a5232);
+  border-radius: 6px;
+  z-index: 1;
+  transition: box-shadow 0.15s ease;
+}
+
+.base {
+  width: 92%;
+  height: 14px;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dim));
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.discs {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.disc {
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(0,0,0,0.15)), var(--c);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(0,0,0,0.45);
+  animation: pousar 0.22s ease;
+}
+
+@keyframes pousar {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 520px) {
+  .board { height: 260px; padding: 34px 8px 0; }
+  .rod { height: 190px; }
+  .controls { gap: 8px; }
+  .btn { padding: 8px 12px; font-size: 0.8rem; }
+}
