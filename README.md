@@ -59,3 +59,8 @@ GitHub Pages não roda o server.js — mas o jogo funciona 100% no
 navegador sem precisar de backend, o server.js é só conveniência
 
 pra rodar local).
+
+
+## 🎮 Jogar
+
+Teste o jogo direto no navegador: **[jogo-torredehanoi-9xo1.vercel.app](https://jogo-torredehanoi-9xo1.vercel.app)**
